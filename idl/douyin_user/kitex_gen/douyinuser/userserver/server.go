@@ -2,7 +2,7 @@
 package userserver
 
 import (
-	douyinuser "douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	server "github.com/cloudwego/kitex/server"
 )
 

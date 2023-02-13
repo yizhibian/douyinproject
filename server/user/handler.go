@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	douyinuser "douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/pkg/errno"
 	"douyin-user/server/user/pack"
 	"douyin-user/server/user/service"

@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/server/user/dal/db"
 	"douyin-user/server/user/pack"
 )

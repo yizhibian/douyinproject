@@ -1,7 +1,7 @@
 package pack
 
 import (
-	"douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/pkg/errno"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"

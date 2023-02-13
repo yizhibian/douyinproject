@@ -16,7 +16,7 @@
 package pack
 
 import (
-	"douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/pkg/errno"
 	"errors"
 	"time"

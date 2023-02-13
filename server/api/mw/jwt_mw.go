@@ -2,7 +2,7 @@ package mw
 
 import (
 	"context"
-	"douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/pkg/constants"
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/handler/user_handler"

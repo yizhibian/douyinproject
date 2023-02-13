@@ -4,7 +4,7 @@ package userserver
 
 import (
 	"context"
-	douyinuser "douyin-user/idl/kitex_test/kitex_gen/douyinuser"
+	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 )

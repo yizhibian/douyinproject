@@ -1,7 +1,7 @@
 package main
 
 import (
-	douyinuser "douyin-user/idl/kitex_test/kitex_gen/douyinuser/userserver"
+	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser/userserver"
 	"douyin-user/pkg/bound"
 	"douyin-user/pkg/constants"
 	"douyin-user/server/user/dal"
