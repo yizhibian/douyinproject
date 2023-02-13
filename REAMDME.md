@@ -6,6 +6,9 @@
 - pkg 项目里有些会依赖到的 还有一些可能没用上
   - 。。。(省略)
   - errno 错误拦截的格式
+  - config 配置文件
+    - sql sql文件
+      - init.sql 初始化用户信息的sql文件
 - server 存放服务端
   - api 网关
     - handler 处理层 提供给网关服务端的所有处理器
@@ -35,6 +38,8 @@
 
 # 注意事项
 ### 最好在idl目录下新建目录来生成代码 因为代码生成完会有点乱而且不能撤回不是很方便
+    kitex -service douyinuser(服务名称) ../user/thrift(文件存放地)
+    //具体看官网 https://www.cloudwego.io/zh/docs/kitex/tutorials/code-gen/code_generation/
 ### 路由层需要加入以下代码才会调用 登陆 的中间件
     user1 := r.Group("/user")
 	user1.POST("/login", mw.JwtMiddleware.LoginHandler)
