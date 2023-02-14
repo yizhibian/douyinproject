@@ -4,11 +4,14 @@ import (
 	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser/userserver"
 	"douyin-user/pkg/bound"
 	"douyin-user/pkg/constants"
+	"douyin-user/pkg/middleware"
+	"douyin-user/pkg/tracer"
 	"douyin-user/server/user/dal"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
+	trace "github.com/kitex-contrib/tracer-opentracing"
 	"net"
 
 	etcd "github.com/kitex-contrib/registry-etcd"
@@ -16,6 +19,7 @@ import (
 
 func Init() {
 	dal.Init()
+	tracer.InitJaeger(constants.UserServiceName)
 }
 
 func main() {
@@ -31,9 +35,12 @@ func main() {
 	Init()
 	svr := douyinuser.NewServer(new(UserServerImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: constants.UserServiceName}), // server name
+		server.WithMiddleware(middleware.CommonMiddleware),                                             // middleware
+		server.WithMiddleware(middleware.ServerMiddleware),
 		server.WithServiceAddr(addr),                                       // address
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}), // limit
 		server.WithMuxTransport(),                                          // Multiplex
+		server.WithSuite(trace.NewDefaultServerSuite()),                    // tracer
 		server.WithBoundHandler(bound.NewCpuLimitHandler()),                // BoundHandler
 		server.WithRegistry(r),                                             // registry
 	)

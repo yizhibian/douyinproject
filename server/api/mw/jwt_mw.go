@@ -7,7 +7,6 @@ import (
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/handler/user_handler"
 	"douyin-user/server/api/rpc"
-	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	jwtTool "github.com/golang-jwt/jwt/v4"
@@ -27,7 +26,6 @@ func InitJwt() {
 		//然后往链里加这个负载数据
 		//claims := token.Claims.(jwt.MapClaims)
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
-			fmt.Println("where the fucking id ", data)
 			if v, ok := data.(int64); ok {
 				return jwt.MapClaims{
 					constants.IdentityKey: v,

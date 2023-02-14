@@ -20,13 +20,26 @@ import (
 
 	"github.com/opentracing/opentracing-go"
 	"github.com/uber/jaeger-client-go"
-	jaegercfg "github.com/uber/jaeger-client-go/config"
+	"github.com/uber/jaeger-client-go/config"
 )
 
 func InitJaeger(service string) {
-	cfg, _ := jaegercfg.FromEnv()
+
+	cfg := &config.Configuration{
+		Sampler: &config.SamplerConfig{
+			Type:  "const",
+			Param: 1,
+		},
+		Reporter: &config.ReporterConfig{
+			LogSpans:           true,
+			LocalAgentHostPort: "127.0.0.1:6831",
+		},
+	}
+
+	//cfg, _ := jaegercfg.FromEnv()
 	cfg.ServiceName = service
-	tracer, _, err := cfg.NewTracer(jaegercfg.Logger(jaeger.StdLogger))
+	tracer, _, err := cfg.NewTracer(config.Logger(jaeger.StdLogger))
+	//tracer.StartSpan("getFood")
 	if err != nil {
 		panic(fmt.Sprintf("ERROR: cannot init Jaeger: %v\n", err))
 	}

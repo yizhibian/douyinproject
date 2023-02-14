@@ -31,7 +31,6 @@ func (s *CheckUserService) CheckUser(req *douyinuser.UserRequest) (int64, error)
 
 	userName := req.GetUsername()
 	users, err := db.QueryUser(s.ctx, userName)
-	fmt.Println("the user is", users)
 	if err != nil {
 		return 0, err
 	}

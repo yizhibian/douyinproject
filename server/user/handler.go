@@ -2,11 +2,10 @@ package main
 
 import (
 	"context"
-	douyinuser "douyin-user/idl/douyin_user/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/pkg/errno"
 	"douyin-user/server/user/pack"
 	"douyin-user/server/user/service"
-	"fmt"
 )
 
 // UserServerImpl implements the last service interface defined in the IDL.
@@ -50,7 +49,6 @@ func (s *UserServerImpl) CheckUser(ctx context.Context, req *douyinuser.CheckUse
 		return resp, nil
 	}
 	resp.UserResp = &douyinuser.UserResponse{UserId: uid}
-	fmt.Println("here we got the userId is ", uid)
 	resp.BaseResp = pack.BuildBaseResp(errno.Success)
 	return resp, nil
 }

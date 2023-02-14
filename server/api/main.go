@@ -17,6 +17,8 @@ package main
 
 import (
 	"context"
+	"douyin-user/pkg/constants"
+	"douyin-user/pkg/tracer"
 	"douyin-user/server/api/mw"
 	"douyin-user/server/api/router"
 	"douyin-user/server/api/rpc"
@@ -27,6 +29,7 @@ import (
 )
 
 func Init() {
+	tracer.InitJaeger(constants.ApiServiceName)
 	rpc.InitRPC()
 	mw.InitJwt()
 }
