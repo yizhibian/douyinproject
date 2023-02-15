@@ -8,4 +8,5 @@ import (
 func Register(r *server.Hertz) {
 
 	UserRegister(r)
+	CommentRegister(r)
 }

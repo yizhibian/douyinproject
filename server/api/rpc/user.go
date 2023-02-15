@@ -32,7 +32,7 @@ import (
 
 var userClient userserver.Client
 
-func initUserRpc() {
+func InitUserRpc() {
 	r, err := etcd.NewEtcdResolver([]string{constants.EtcdAddress})
 	if err != nil {
 		panic(err)
