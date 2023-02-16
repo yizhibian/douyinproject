@@ -26,7 +26,6 @@ const (
 	ParamErrCode               = 10002
 	UserAlreadyExistErrCode    = 10003
 	AuthorizationFailedErrCode = 10004
-	NilValueErrCode            = 10005
 )
 
 type ErrNo struct {
@@ -51,15 +50,13 @@ var (
 	Success                = NewErrNo(SuccessCode, "Success")
 	ServiceErr             = NewErrNo(ServiceErrCode, "Service is unable to start successfully")
 	ParamErr               = NewErrNo(ParamErrCode, "Wrong Parameter has been given")
+	UserIdErr              = NewErrNo(ParamErrCode, "Wrong Parameter[UserId] has been given")
+	ActionTypeErr          = NewErrNo(ParamErrCode, "Wrong Parameter[ActionType] has been given")
+	CommentTextErr         = NewErrNo(ParamErrCode, "Wrong Parameter[CommentText] has been given")
+	VideoErr               = NewErrNo(ParamErrCode, "Wrong Parameter[Video] has been given")
+	CommentTextTooLongErr  = NewErrNo(ParamErrCode, "Parameter[CommentText] too long")
 	UserAlreadyExistErr    = NewErrNo(UserAlreadyExistErrCode, "User already exists")
 	AuthorizationFailedErr = NewErrNo(AuthorizationFailedErrCode, "Authorization failed")
-
-	UserIdErr             = NewErrNo(ParamErrCode, "Wrong Parameter[UserId] has been given")
-	ActionTypeErr         = NewErrNo(ParamErrCode, "Wrong Parameter[ActionType] has been given")
-	CommentTextErr        = NewErrNo(ParamErrCode, "Wrong Parameter[CommentText] has been given")
-	VideoErr              = NewErrNo(ParamErrCode, "Wrong Parameter[Video] has been given")
-	CommentTextTooLongErr = NewErrNo(ParamErrCode, "Parameter[CommentText] too long")
-	CommentIdErr          = NewErrNo(ParamErrCode, "Wrong Parameter[CommentIdErr] has been given")
 )
 
 // ConvertErr convert error to Errno

@@ -13,10 +13,11 @@
 // limitations under the License.
 //
 
-package rpc
+package dal
 
-// InitRPC init rpc client
-func InitRPC() {
-	InitUserRpc()
-	initCommentRpc()
+import "douyin-user/server/comment/dal/db"
+
+// Init init dal
+func Init() {
+	db.Init() // mysql init
 }

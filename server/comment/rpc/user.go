@@ -55,30 +55,6 @@ func InitUserRpc() {
 	userClient = c
 }
 
-// CreateUser create  a new user
-func CreateUser(ctx context.Context, req *douyinuser.CreateUserRequest) (int64, error) {
-	resp, err := userClient.CreateUser(ctx, req)
-	if err != nil {
-		return 0, err
-	}
-	if resp.BaseResp.StatusCode != 0 {
-		return 0, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
-	}
-	return resp.GetUserResp().GetUserId(), nil
-}
-
-// CheckUser check user by username and password
-func CheckUser(ctx context.Context, req *douyinuser.CheckUserRequest) (int64, error) {
-	resp, err := userClient.CheckUser(ctx, req)
-	if err != nil {
-		return 0, err
-	}
-	if resp.BaseResp.StatusCode != 0 {
-		return 0, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
-	}
-	return resp.GetUserResp().GetUserId(), nil
-}
-
 // GetUserInfo get the user you want by userId
 func GetUserInfo(ctx context.Context, req *douyinuser.GetUserInfoRequest) (*douyinuser.User, error) {
 	resp, err := userClient.GetUserInfo(ctx, req)

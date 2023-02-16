@@ -13,10 +13,34 @@
 // limitations under the License.
 //
 
-package rpc
+package db
 
-// InitRPC init rpc client
-func InitRPC() {
-	InitUserRpc()
-	initCommentRpc()
+import (
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/schema"
+	gormopentracing "gorm.io/plugin/opentracing"
+)
+
+var DB *gorm.DB
+
+// Init init DB
+func Init() {
+	var err error
+	DB, err = gorm.Open(mysql.Open("gorm:gorm@tcp(localhost:9910)/gorm?charset=utf8&parseTime=True&loc=Local"),
+		&gorm.Config{
+			PrepareStmt:            true,
+			SkipDefaultTransaction: true,
+			NamingStrategy: schema.NamingStrategy{
+				SingularTable: true,
+			},
+		},
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	if err = DB.Use(gormopentracing.New()); err != nil {
+		panic(err)
+	}
 }
