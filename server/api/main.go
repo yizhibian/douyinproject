@@ -37,7 +37,7 @@ func Init() {
 func main() {
 	Init()
 	r := server.New(
-		server.WithHostPorts("127.0.0.1:8081"),
+		server.WithHostPorts("0.0.0.0:8081"),
 		server.WithHandleMethodNotAllowed(true),
 	)
 

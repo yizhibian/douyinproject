@@ -18,5 +18,6 @@ package rpc
 // InitRPC init rpc client
 func InitRPC() {
 	InitUserRpc()
+	initVideoRpc()
 	initCommentRpc()
 }
