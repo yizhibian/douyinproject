@@ -8,6 +8,7 @@ import (
 	"douyin-user/server/api/rpc"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"github.com/cloudwego/kitex/tool/internal_pkg/log"
 )
 
 // Feed implements the VideoServerImpl interface.
@@ -17,11 +18,13 @@ func Feed(ctx context.Context, c *app.RequestContext) {
 		pack.SendBaseResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
+	log.Info(queryVar)
 	req := douyinvideo.FeedRequest{
 		LatestTime: queryVar.LatestTime,
 		Token:      queryVar.Token,
 	}
 	r, err := rpc.Feed(context.Background(), &req)
+	log.Info(r)
 	if err != nil {
 		pack.SendBaseResponse(c, errno.ConvertErr(err), nil)
 		return

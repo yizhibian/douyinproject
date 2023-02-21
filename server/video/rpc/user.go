@@ -17,12 +17,11 @@ package rpc
 
 import (
 	"context"
-	"douyin-user/idl/douyin_video/kitex_gen/douyinvideo"
-	"douyin-user/idl/douyin_video/kitex_gen/douyinvideo/videoserver"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser/userserver"
 	"douyin-user/pkg/constants"
 	"douyin-user/pkg/errno"
 	"douyin-user/pkg/middleware"
-	"douyin-user/server/comment/rpc"
 	"time"
 
 	"github.com/cloudwego/kitex/client"
@@ -31,16 +30,16 @@ import (
 	trace "github.com/kitex-contrib/tracer-opentracing"
 )
 
-var videoClient videoserver.Client
+var userClient userserver.Client
 
-func initVideoRpc() {
+func InitUserRpc() {
 	r, err := etcd.NewEtcdResolver([]string{constants.EtcdAddress})
 	if err != nil {
 		panic(err)
 	}
-	rpc.InitRPC()
-	c, err := videoserver.NewClient(
-		constants.VideoServiceName,
+
+	c, err := userserver.NewClient(
+		constants.UserServiceName,
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
 		client.WithMuxConnection(1),                       // mux
@@ -53,39 +52,17 @@ func initVideoRpc() {
 	if err != nil {
 		panic(err)
 	}
-	videoClient = c
+	userClient = c
 }
 
-// CreateUser create  a new user
-func Feed(ctx context.Context, req *douyinvideo.FeedRequest) (r *douyinvideo.FeedResponse, err error) {
-	resp, err := videoClient.Feed(ctx, req)
+// GetUserInfo get the user you want by userId
+func GetUserInfo(ctx context.Context, req *douyinuser.GetUserInfoRequest) (*douyinuser.User, error) {
+	resp, err := userClient.GetUserInfo(ctx, req)
 	if err != nil {
 		return nil, err
 	}
 	if resp.BaseResp.StatusCode != 0 {
 		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
 	}
-	return resp, nil
-}
-
-func GetList(ctx context.Context, req *douyinvideo.GetListRequest) (r *douyinvideo.GetListResponse, err error) {
-	resp, err := videoClient.GetList(ctx, req)
-	if err != nil {
-		return nil, err
-	}
-	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
-	}
-	return resp, nil
-}
-
-func Publish(ctx context.Context, req *douyinvideo.PublishRequest) (r *douyinvideo.PublishResponse, err error) {
-	resp, err := videoClient.Publish(ctx, req)
-	if err != nil {
-		return nil, err
-	}
-	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
-	}
-	return resp, nil
+	return resp.GetUser(), nil
 }

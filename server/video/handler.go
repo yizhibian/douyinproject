@@ -6,7 +6,7 @@ import (
 	"douyin-user/pkg/errno"
 	"douyin-user/server/video/pack"
 	"douyin-user/server/video/service"
-	"github.com/cloudwego/kitex/tool/internal_pkg/log"
+	"log"
 	"time"
 )
 
@@ -17,6 +17,7 @@ type VideoServerImpl struct{}
 func (s *VideoServerImpl) Publish(ctx context.Context, req *douyinvideo.PublishRequest) (resp *douyinvideo.PublishResponse, err error) {
 	resp = douyinvideo.NewPublishResponse()
 	title := req.GetTitle()
+	log.Printf(title + "title")
 	id := ctx.Value("PublishUserId")
 	data := req.Data
 	if len(data) == 0 {
@@ -44,9 +45,10 @@ func (s *VideoServerImpl) GetList(ctx context.Context, req *douyinvideo.GetListR
 func (s *VideoServerImpl) Feed(ctx context.Context, req *douyinvideo.FeedRequest) (resp *douyinvideo.FeedResponse, err error) {
 	resp = douyinvideo.NewFeedResponse()
 	latestTime := req.GetLatestTime()
-	log.Info(latestTime)
+	log.Printf("lasttime====>" + latestTime)
 	list := service.NewFeedService(ctx).Feed(latestTime)
 	resp.SetVideoList(list)
+	log.Printf("setlist:%#v\n", list)
 	resp.SetNextTime(time.Now().Unix())
 	return
 }

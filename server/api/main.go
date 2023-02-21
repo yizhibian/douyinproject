@@ -39,9 +39,8 @@ func main() {
 	r := server.New(
 		server.WithHostPorts("0.0.0.0:8081"),
 		server.WithHandleMethodNotAllowed(true),
+		server.WithMaxRequestBodySize(400*1024*1024),
 	)
-
-	//v1 := r.Group("/v1")
 
 	router.Register(r)
 
