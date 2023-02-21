@@ -9,7 +9,7 @@ import (
 // UserRegister registers user module routers.
 func UserRegister(r *server.Hertz) {
 
-	user1 := r.Group("/user")
+	user1 := r.Group("/douyin/user")
 	user1.POST("/login", mw.JwtMiddleware.LoginHandler)
 	user1.POST("/register", user_handler.Register)
 

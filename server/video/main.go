@@ -7,35 +7,28 @@ import (
 	"douyin-user/pkg/middleware"
 	"douyin-user/pkg/tracer"
 	"douyin-user/server/video/dal"
-	"github.com/cloudwego/kitex/pkg/klog"
+	"douyin-user/server/video/rpc"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	etcd "github.com/kitex-contrib/registry-etcd"
 	trace "github.com/kitex-contrib/tracer-opentracing"
+	"log"
 	"net"
 )
 
-func Init() {
+func main() {
 	dal.Init()
 	tracer.InitJaeger(constants.VideoServiceName)
-}
-
-func main() {
-
+	rpc.InitRPC()
 	r, err := etcd.NewEtcdRegistry([]string{constants.EtcdAddress})
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8889")
-	if err != nil {
-		panic(err)
-	}
-	Init()
-
+	addr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8989")
 	svr := videoserver.NewServer(new(VideoServerImpl),
-		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: constants.UserServiceName}), // server name
-		server.WithMiddleware(middleware.CommonMiddleware),                                             // middleware
+		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: constants.VideoServiceName}), // server name
+		server.WithMiddleware(middleware.CommonMiddleware),                                              // middleware
 		server.WithMiddleware(middleware.ServerMiddleware),
 		server.WithServiceAddr(addr),                                       // address
 		server.WithLimit(&limit.Option{MaxConnections: 1000, MaxQPS: 100}), // limit
@@ -46,6 +39,6 @@ func main() {
 	)
 	err = svr.Run()
 	if err != nil {
-		klog.Fatal(err)
+		log.Println(err.Error())
 	}
 }

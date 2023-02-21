@@ -18,13 +18,12 @@ package pack
 import (
 	"douyin-user/idl/douyin_video/kitex_gen/douyinvideo"
 	"douyin-user/server/video/dal/db"
+	"log"
 )
 
 // UserInfo pack user detail info
 func VideoInfo(v *db.Video) *douyinvideo.Video {
-	if v == nil {
-		return nil
-	}
+	log.Printf("VideoInfo:%#v\n", v)
 	return &douyinvideo.Video{
 		Id: v.Id,
 		//Author:        v.Author,
@@ -38,12 +37,14 @@ func VideoInfo(v *db.Video) *douyinvideo.Video {
 }
 
 func VideoInfos(v []*db.Video) []*douyinvideo.Video {
-	if len(v) == 0 {
+	l := len(v)
+	if l == 0 {
 		return nil
 	}
-	var vs []*douyinvideo.Video
-	for i := range vs {
+	vs := make([]*douyinvideo.Video, l, l)
+	for i := range v {
 		vs[i] = VideoInfo(v[i])
 	}
+	log.Printf("VideoInfos:%#v\n", vs)
 	return vs
 }

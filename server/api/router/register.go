@@ -6,7 +6,7 @@ import (
 
 // Register registers user module routers.
 func Register(r *server.Hertz) {
-
 	UserRegister(r)
+	VideoRegister(r)
 	CommentRegister(r)
 }
