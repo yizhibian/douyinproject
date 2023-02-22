@@ -9,7 +9,7 @@ import (
 // UserRegister registers user module routers.
 func VideoRegister(r *server.Hertz) {
 	feedG := r.Group("/douyin/feed")
-	feedG.Use(mw.JwtMiddleware.MiddlewareFunc())
+	//feedG.Use(mw.JwtMiddleware.MiddlewareFunc())
 	feedG.GET("/", video_handler.Feed) //视频流接口
 
 	pG := r.Group("/douyin/publish")
