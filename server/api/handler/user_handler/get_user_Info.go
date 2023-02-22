@@ -6,6 +6,7 @@ import (
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/pack"
 	"douyin-user/server/api/rpc"
+	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 	//jwtTool "github.com/golang-jwt/jwt/v4"
 )
@@ -37,9 +38,9 @@ func GetUserInfo(ctx context.Context, c *app.RequestContext) {
 	}
 
 	//获取token带的id的方法
-	//if value, exists := c.Get("identity"); exists {
-	//	fmt.Println("the id is ", value)
-	//}
+	if value, exists := c.Get("identity"); exists {
+		fmt.Println("the id is ", value)
+	}
 
 	pack.SendUserInfoResponse(c, errno.Success, userInfo)
 }

@@ -3,13 +3,11 @@ package video_handler
 import (
 	"context"
 	"douyin-user/idl/douyin_video/kitex_gen/douyinvideo"
-	"douyin-user/pkg/constants"
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/pack"
 	"douyin-user/server/api/rpc"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	"github.com/hertz-contrib/jwt"
 	"log"
 )
 
@@ -35,9 +33,13 @@ func Publish(ctx context.Context, c *app.RequestContext) {
 	//if id, exists := c.Get("identity"); exists {
 	//	fmt.Println("the id is ", id)
 	//}
-	claims := jwt.ExtractClaims(ctx, c)
-	id := int64(claims[constants.IdentityKey].(float64))
-	log.Printf("id======%#v\n", id)
+	id, exists := c.Get("identity")
+	if !exists {
+		log.Println("cant get id")
+	}
+	//claims := jwt.ExtractClaims(ctx, c)
+	//id := int64(claims[constants.IdentityKey].(float64))
+	//log.Printf("id======%#v\n", id)
 	//d := 2
 	sonCtx := context.WithValue(ctx, "PublishUserId", id)
 	r, err := rpc.Publish(sonCtx, &req)

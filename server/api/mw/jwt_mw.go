@@ -90,7 +90,7 @@ func InitJwt() {
 
 			return rpc.CheckUser(context.Background(), request)
 		},
-		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
+		TokenLookup:   "header: Authorization, query: token, cookie: jwt,form: token",
 		TokenHeadName: "Bearer",
 		TimeFunc:      time.Now,
 	})
