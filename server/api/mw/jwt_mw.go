@@ -59,10 +59,11 @@ func InitJwt() {
 			userId := mapClaims["id"]
 
 			c.JSON(consts.StatusOK, map[string]interface{}{
-				"code":   errno.SuccessCode,
-				"token":  token,
-				"expire": expire.Format(time.RFC3339),
-				"id":     userId,
+				"status_code": errno.SuccessCode,
+				"status_msg":  "the expire is " + expire.Format(time.RFC3339),
+				"token":       token,
+				//"expire":      expire.Format(time.RFC3339),
+				"user_id": userId,
 			})
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
