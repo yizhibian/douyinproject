@@ -22,21 +22,26 @@ import (
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/pack"
 	"douyin-user/server/api/rpc"
+	"fmt"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/golang-jwt/jwt/v4"
+	"log"
 	"time"
 )
 
 // Register register user info
 func Register(ctx context.Context, c *app.RequestContext) {
+	fmt.Println("Register")
 	var registerVar UserParam
 	if err := c.Bind(&registerVar); err != nil {
+		log.Println("the error in register is" + err.Error())
 		pack.SendBaseResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
 
 	if len(registerVar.UserName) == 0 || len(registerVar.PassWord) == 0 {
 		pack.SendBaseResponse(c, errno.ParamErr, nil)
+		log.Println("the error in register is wrong value")
 		return
 	}
 
