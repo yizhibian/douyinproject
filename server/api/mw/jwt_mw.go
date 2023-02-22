@@ -6,6 +6,7 @@ import (
 	"douyin-user/pkg/constants"
 	"douyin-user/pkg/errno"
 	"douyin-user/server/api/handler/user_handler"
+	"douyin-user/server/api/pack"
 	"douyin-user/server/api/rpc"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -56,14 +57,14 @@ func InitJwt() {
 			})
 
 			mapClaims := parse.Claims.(jwtTool.MapClaims)
-			userId := mapClaims["id"]
+			userId := int64(mapClaims["id"].(float64))
 
-			c.JSON(consts.StatusOK, map[string]interface{}{
-				"status_code": errno.SuccessCode,
-				"status_msg":  "the expire is " + expire.Format(time.RFC3339),
-				"token":       token,
+			c.JSON(consts.StatusOK, pack.UserResponse{
+				Code:    errno.SuccessCode,
+				Message: "the expire is " + expire.Format(time.RFC3339),
+				Token:   token,
 				//"expire":      expire.Format(time.RFC3339),
-				"user_id": userId,
+				Id: userId,
 			})
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
