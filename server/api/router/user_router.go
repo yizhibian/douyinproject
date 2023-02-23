@@ -10,8 +10,8 @@ import (
 func UserRegister(r *server.Hertz) {
 
 	user1 := r.Group("/douyin/user")
-	user1.POST("/login", mw.JwtMiddleware.LoginHandler)
-	user1.POST("/register", user_handler.Register)
+	user1.POST("/login/", mw.JwtMiddleware.LoginHandler)
+	user1.POST("/register/", user_handler.Register)
 
 	//在这之前都是没有登陆拦截的
 	//使用这个后即加入登陆中间件 需携带token访问

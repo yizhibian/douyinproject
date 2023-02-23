@@ -25,6 +25,6 @@ const (
 	CommentServiceName                  = "douyincomment"
 	VideoServiceMySQLDefaultDSN         = "root:123456@tcp(43.136.22.7:3306)/video_db?charset=utf8mb4&parseTime=True&loc=Local"
 	MySQLDefaultDSN                     = "gorm:gorm@tcp(47.113.179.3:9910)/gorm?charset=utf8&parseTime=True&loc=Local"
-	EtcdAddress                         = "47.113.179.3:2379"
+	EtcdAddress                         = "47.115.227.234:2379"
 	CPURateLimit                float64 = 80.0
 )

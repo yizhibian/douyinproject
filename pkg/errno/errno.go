@@ -22,11 +22,11 @@ import (
 
 const (
 	SuccessCode                = 0
-	ServiceErrCode             = 10001
-	ParamErrCode               = 10002
-	UserAlreadyExistErrCode    = 10003
-	AuthorizationFailedErrCode = 10004
-	NilValueErrCode            = 10005
+	ServiceErrCode             = 1
+	ParamErrCode               = 1
+	UserAlreadyExistErrCode    = 1
+	AuthorizationFailedErrCode = 1
+	NilValueErrCode            = 1
 )
 
 type ErrNo struct {

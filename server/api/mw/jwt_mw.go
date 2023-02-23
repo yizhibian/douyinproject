@@ -12,6 +12,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	jwtTool "github.com/golang-jwt/jwt/v4"
 	"github.com/hertz-contrib/jwt"
+	"log"
 	"time"
 )
 
@@ -69,13 +70,14 @@ func InitJwt() {
 		},
 		Unauthorized: func(ctx context.Context, c *app.RequestContext, code int, message string) {
 			c.JSON(code, map[string]interface{}{
-				"code":    errno.AuthorizationFailedErrCode,
-				"message": message,
+				"status_code": errno.AuthorizationFailedErrCode,
+				"message":     message,
 			})
 		},
 		Authenticator: func(ctx context.Context, c *app.RequestContext) (interface{}, error) {
 			var loginVar user_handler.UserParam
 			if err := c.Bind(&loginVar); err != nil {
+				log.Println("the err is " + err.Error())
 				return "", jwt.ErrMissingLoginValues
 			}
 

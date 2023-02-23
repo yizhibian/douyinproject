@@ -27,7 +27,7 @@ var DB *gorm.DB
 // Init init DB
 func Init() {
 	var err error
-	DB, err = gorm.Open(mysql.Open("gorm:gorm@tcp(localhost:9910)/gorm?charset=utf8&parseTime=True&loc=Local"),
+	DB, err = gorm.Open(mysql.Open("gorm:gorm@tcp(47.115.227.234:9910)/gorm?charset=utf8&parseTime=True&loc=Local"),
 		&gorm.Config{
 			PrepareStmt:            true,
 			SkipDefaultTransaction: true,
