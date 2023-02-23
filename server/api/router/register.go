@@ -9,4 +9,5 @@ func Register(r *server.Hertz) {
 	UserRegister(r)
 	VideoRegister(r)
 	CommentRegister(r)
+	FavoriteRegister(r)
 }

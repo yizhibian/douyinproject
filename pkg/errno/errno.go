@@ -60,6 +60,10 @@ var (
 	VideoErr              = NewErrNo(ParamErrCode, "Wrong Parameter[Video] has been given")
 	CommentTextTooLongErr = NewErrNo(ParamErrCode, "Parameter[CommentText] too long")
 	CommentIdErr          = NewErrNo(ParamErrCode, "Wrong Parameter[CommentIdErr] has been given")
+
+	NoFavoriteErr      = NewErrNo(ParamErrCode, "Did not favorite this video before")
+	FavoriteErr        = NewErrNo(ParamErrCode, "You have favorited this video before")
+	WrongActionTypeErr = NewErrNo(ParamErrCode, "the action_type was wrong")
 )
 
 // ConvertErr convert error to Errno

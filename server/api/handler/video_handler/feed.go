@@ -9,6 +9,8 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/cloudwego/kitex/tool/internal_pkg/log"
+	"strconv"
+	"time"
 )
 
 // Feed implements the VideoServerImpl interface.
@@ -17,6 +19,9 @@ func Feed(ctx context.Context, c *app.RequestContext) {
 	if err := c.Bind(&queryVar); err != nil {
 		pack.SendBaseResponse(c, errno.ConvertErr(err), nil)
 		return
+	}
+	if c.Query("latest_time") == "" {
+		queryVar.LatestTime = strconv.FormatInt(time.Now().Unix(), 10)
 	}
 	log.Info(queryVar)
 	req := douyinvideo.FeedRequest{

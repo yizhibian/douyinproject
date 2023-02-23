@@ -62,8 +62,8 @@ func Feed(ctx context.Context, req *douyinvideo.FeedRequest) (r *douyinvideo.Fee
 	if err != nil {
 		return nil, err
 	}
-	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
+	if resp.StatusCode != 0 {
+		return nil, errno.NewErrNo(resp.StatusCode, resp.StatusMsg)
 	}
 	return resp, nil
 }
@@ -73,8 +73,8 @@ func GetList(ctx context.Context, req *douyinvideo.GetListRequest) (r *douyinvid
 	if err != nil {
 		return nil, err
 	}
-	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
+	if resp.StatusCode != 0 {
+		return nil, errno.NewErrNo(resp.StatusCode, resp.StatusMsg)
 	}
 	return resp, nil
 }
@@ -84,8 +84,8 @@ func Publish(ctx context.Context, req *douyinvideo.PublishRequest) (r *douyinvid
 	if err != nil {
 		return nil, err
 	}
-	if resp.BaseResp.StatusCode != 0 {
-		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMessage)
+	if resp.StatusCode != 0 {
+		return nil, errno.NewErrNo(resp.StatusCode, resp.StatusMsg)
 	}
 	return resp, nil
 }
