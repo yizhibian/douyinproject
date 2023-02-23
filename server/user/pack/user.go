@@ -33,8 +33,8 @@ func UserInfo(u *db.User) *douyinuser.User {
 }
 
 // Users pack list of user info
-//func Users(us []*db.User) []*douyinfavorite.User {
-//	users := make([]*douyinfavorite.User, 0)
+//func Users(us []*db.User) []*douyinuser.User {
+//	users := make([]*douyinuser.User, 0)
 //	for _, u := range us {
 //		if user2 := User(u); user2 != nil {
 //			users = append(users, user2)

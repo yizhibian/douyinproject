@@ -50,20 +50,24 @@ struct FeedRequest{
 }
 
 struct FeedResponse{
-    1:BaseResp baseResp
-    2:i64 next_time
-    3:list<Video> video_list
+    1:i64 status_code //状态码，0-成功，其他值-失败
+    2:string status_msg //返回状态描述
+    3:i64 next_time
+    4:list<Video> video_list
 }
 
 //投稿接口
 struct PublishRequest{
-    1:binary data
+    1:i64 author_id
     2:string token
     3:string title
+    4:string play_url
+    5:string cover_url
 }
 
 struct PublishResponse{
-    1:BaseResp base_resp
+    1:i64 status_code //状态码，0-成功，其他值-失败
+    2:string status_msg //返回状态描述
 }
 
 //发布列表接口
@@ -73,8 +77,29 @@ struct GetListRequest{
 }
 
 struct GetListResponse{
-    1:BaseResp base_resp
-    2:list<Video> video_list
+    1:i64 status_code //状态码，0-成功，其他值-失败
+    2:string status_msg //返回状态描述
+    3:list<Video> video_list
+}
+//更新点赞
+struct AddLikeRequest{
+    1:i64 video_id// 用户id
+    2:string action_type
+}
+
+struct AddLikeRespose{
+    1:i64 status_code //状态码，0-成功，其他值-失败
+    2:string status_msg //返回状态描述
+}
+
+//根据id获取视频列表
+struct GetListByVIDRequest{
+    1:list<i64> video_id// 用户id
+}
+struct GetListByVIDRespose{
+    1:i64 status_code //状态码，0-成功，其他值-失败
+    2:string status_msg //返回状态描述
+    3:list<Video> video_list
 }
 
 service VideoServer {

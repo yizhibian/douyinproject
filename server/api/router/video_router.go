@@ -14,6 +14,6 @@ func VideoRegister(r *server.Hertz) {
 
 	pG := r.Group("/douyin/publish")
 	pG.Use(mw.JwtMiddleware.MiddlewareFunc())
-	pG.GET("/list", video_handler.GetList)    //获取发布视频列表
-	pG.POST("/action", video_handler.Publish) //投稿
+	pG.GET("/list/", video_handler.GetList)    //获取发布视频列表
+	pG.POST("/action/", video_handler.Publish) //投稿
 }

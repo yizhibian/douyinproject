@@ -17,16 +17,14 @@ package constants
 
 const (
 	UserTableName                       = "user"
-	FavoriteTableName                   = "favorite"
 	SecretKey                           = "secret key"
 	IdentityKey                         = "id"
 	ApiServiceName                      = "douyinapi"
 	UserServiceName                     = "douyinuser"
 	VideoServiceName                    = "douyinvideo"
-	FavoriteServiceName                 = "douyinfavorite"
 	CommentServiceName                  = "douyincomment"
-	VideoServiceMySQLDefaultDSN         = "root:123456@tcp(43.136.22.7:3306)/video_db?charset=utf8mb4&parseTime=True&loc=Local"
-	MySQLDefaultDSN                     = "gorm:gorm@tcp(127.0.0.1:9910)/gorm?charset=utf8&parseTime=True&loc=Local"
-	EtcdAddress                         = "127.0.0.1:2379"
+	VideoServiceMySQLDefaultDSN         = "root:no@tcp(43.136.221.7:3306)/video_db?charset=utf8mb4&parseTime=True&loc=Local"
+	MySQLDefaultDSN                     = "root:no@tcp(43.136.221.7:3306)/douyin?charset=utf8&parseTime=True&loc=Local"
+	EtcdAddress                         = "43.136.22.7:2379"
 	CPURateLimit                float64 = 80.0
 )

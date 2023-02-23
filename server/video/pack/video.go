@@ -16,7 +16,11 @@
 package pack
 
 import (
+	"context"
+	"douyin-user/idl/douyin_user/kitex_gen/douyinuser"
 	"douyin-user/idl/douyin_video/kitex_gen/douyinvideo"
+	"douyin-user/server/video/rpc"
+
 	"douyin-user/server/video/dal/db"
 	"log"
 )
@@ -24,9 +28,22 @@ import (
 // UserInfo pack user detail info
 func VideoInfo(v *db.Video) *douyinvideo.Video {
 	log.Printf("VideoInfo:%#v\n", v)
+	req := douyinuser.GetUserInfoRequest{
+		UserId: v.Id,
+	}
+	var author douyinvideo.User
+	userInfo, err := rpc.GetUserInfo(context.Background(), &req)
+	if err != nil {
+
+	}
+	author.Name = userInfo.Name
+	author.Id = userInfo.Id
+	author.FollowCount = author.FollowCount
+	author.FollowerCount = author.FollowerCount
+	author.IsFollow = author.IsFollow
 	return &douyinvideo.Video{
-		Id: v.Id,
-		//Author:        v.Author,
+		Id:            v.Id,
+		Author:        &author,
 		PlayUrl:       v.PlayUrl,
 		CoverUrl:      v.CoverUrl,
 		FavoriteCount: v.FavoriteCount,

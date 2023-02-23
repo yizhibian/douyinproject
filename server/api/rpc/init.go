@@ -20,5 +20,4 @@ func InitRPC() {
 	InitUserRpc()
 	initVideoRpc()
 	initCommentRpc()
-	InitFavoriteRpc()
 }

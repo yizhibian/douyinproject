@@ -20,7 +20,8 @@ func NewFeedService(ctx context.Context) *FeedService {
 
 func (s *FeedService) Feed(latestTime string) []*douyinvideo.Video {
 	var vs []*db.Video
-	db.DB.Order("created_at desc").Limit(5).Find(&vs)
+	log.Printf("latestTime:%#v\n", latestTime)
+	db.DB.Where("created_at < ?", latestTime).Order("created_at desc").Limit(5).Find(&vs)
 	log.Printf("list:%#v\n", vs)
 	return pack.VideoInfos(vs)
 }
